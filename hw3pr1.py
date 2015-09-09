@@ -159,19 +159,51 @@ def flipflop(filename):
 
 # Sound function to write #1:  reverse
 
+def load(filename):
+    samps, sr = readwav(filename)
+    return (samps, sr)
 
+def reverse(sound):
+    samps, sr = sound
 
+    newsamps = samps[::-1]
+
+    return newsamps, sr
 
 
 
 
 # Sound function to write #2:  volume
 
+def volume(sound, scale_factor):
+    samps, sr = sound
 
+    newsamps = scale(samps, scale_factor)
 
+    return samps, sr
 
+def addSounds(sound1, sound2):
+    samps1, sr1 = sound1
 
+    samps2, sr2 = sound2
 
+    if not (sr1 is sr2):
+        "cant do"
+        return
+
+    newsamps = samps1 + samps2
+
+    return newsamps, sr1
+
+def play(sound):
+    samps, sr = sound
+    writewav(samps, sr, "out.wav")
+    play('out.wav')
+
+def save(sound, filename):
+    samps, sr = sound
+
+    writewav(samps, sr, filename)
 
 # Sound function to write #3:  static
 
